@@ -16,7 +16,7 @@ const Footer = () => {
         <p>
           Sugar DD.
           <br />
-          "Baking sweet dreams, one cake at a time"
+          Baking sweet dreams, one cake at a time
         </p>
       </aside>
       <nav>
