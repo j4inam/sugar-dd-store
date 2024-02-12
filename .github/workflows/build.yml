@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Build Project
     runs-on: macos-latest
     steps:
       - name: Checkout Project
