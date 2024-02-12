@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  padding: 1rem;
+  background-image: url("../public/bg-pattern.jpg");
+  background-repeat: repeat repeat;
+  background-size: 30%;
+}
