@@ -3,6 +3,7 @@ import { Macondo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const macondo = Macondo({
   weight: "400",
@@ -21,10 +22,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={macondo.className} data-theme="valentine">
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={macondo.className} data-theme="luxury">
+        <div className="drawer drawer-end" style={{ height: "calc(100vh - 2rem)" }}>
+          <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col justify-between ">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+          <div className="drawer-side">
+            <label
+              htmlFor="nav-drawer"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu p-4 w-48 min-h-full bg-base-200">
+              <li>
+                <Link href="/about-us">About Us</Link>
+              </li>
+              <li>
+                <Link href="/contact-us">Contact Us</Link>
+              </li>
+              <li>
+                <Link href="/faq">FAQs</Link>
+              </li>
+              <li>
+                <Link href="/track-order">Track Order</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </body>
     </html>
   );
