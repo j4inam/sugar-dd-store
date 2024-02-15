@@ -1,120 +1,96 @@
-"use client"
-
-import ProductCard from "@/components/ProductCard";
+import ProductCarousel from "@/components/ProductCarousel";
+import VerticalProductCarousel from "@/components/VerticalProductCarousel";
 import { Product } from "@/models/Product";
-import { useScroll } from "framer-motion";
-import { useRef } from "react";
 
 const productsList: Product[] = [
   {
-    id: "chocolate-cake-1",
-    title: "Chocolate Cake 1",
+    id: "chocolate-cake",
+    title: "Chocolate Cake",
     price: 59.99,
     quantity: 1,
     quantityUnit: "lb",
     description:
       "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
+    imageURL: "https://source.unsplash.com/bundt-chocolate-cake-W1TOhhlbQpw",
     type: "cake",
     color: "#88a28d",
   },
   {
-    id: "chocolate-cake-2",
-    title: "Chocolate Cake 2",
+    id: "strawberry-cake",
+    title: "Strawberry Cake",
     price: 49.99,
     quantity: 1,
     quantityUnit: "lb",
     description:
       "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
+    imageURL:
+      "https://source.unsplash.com/a-close-up-of-a-cake-on-a-table-with-flowers-SDa6YfGxkDI",
     type: "cake",
     color: "#e86d7b",
   },
   {
-    id: "chocolate-cake-3",
-    title: "Chocolate Cake 3",
+    id: "red-velvet-cake",
+    title: "Red Velvet Cake",
     price: 89.99,
     quantity: 1,
     quantityUnit: "lb",
     description:
       "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
+    imageURL:
+      "https://source.unsplash.com/chocolate-cake-with-white-icing-on-brown-wooden-table-izAbXEaalVY",
     type: "cake",
     color: "#66b1b3",
   },
   {
-    id: "chocolate-cake-4",
-    title: "Chocolate Cake 4",
+    id: "chocolate-cake-2",
+    title: "Chocolate Cake",
     price: 59.99,
     quantity: 1,
     quantityUnit: "lb",
     description:
       "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
-    type: "cake",
-    color: "#ae4770",
-  },
-  {
-    id: "chocolate-cake-5",
-    title: "Chocolate Cake 5",
-    price: 59.99,
-    quantity: 1,
-    quantityUnit: "lb",
-    description:
-      "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
-    type: "cake",
-    color: "#e86d7b",
-  },
-  {
-    id: "chocolate-cake-6",
-    title: "Chocolate Cake 6",
-    price: 59.99,
-    quantity: 1,
-    quantityUnit: "lb",
-    description:
-      "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
+    imageURL: "https://source.unsplash.com/bundt-chocolate-cake-W1TOhhlbQpw",
     type: "cake",
     color: "#88a28d",
   },
   {
-    id: "chocolate-cake-7",
-    title: "Chocolate Cake 7",
-    price: 59.99,
+    id: "strawberry-cake-2",
+    title: "Strawberry Cake",
+    price: 49.99,
     quantity: 1,
     quantityUnit: "lb",
     description:
       "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
-    imageURL: "https://source.unsplash.com/chocolate-cake-kPxsqUGneXQ",
+    imageURL:
+      "https://source.unsplash.com/a-close-up-of-a-cake-on-a-table-with-flowers-SDa6YfGxkDI",
     type: "cake",
-    color: "#ae4770",
+    color: "#e86d7b",
+  },
+  {
+    id: "red-velvet-cake-2",
+    title: "Red Velvet Cake",
+    price: 89.99,
+    quantity: 1,
+    quantityUnit: "lb",
+    description:
+      "Indulge in pure decadence with every slice of this rich and velvety chocolate cake – a heavenly delight for the senses.",
+    imageURL:
+      "https://source.unsplash.com/chocolate-cake-with-white-icing-on-brown-wooden-table-izAbXEaalVY",
+    type: "cake",
+    color: "#66b1b3",
   },
 ];
 
 const Home = () => {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
-
   return (
-    <section ref={container}>
-      {productsList.map((product, index) => {
-        const targetScale = 1 - (productsList.length - index) * 0.025;
-        return (
-          <ProductCard
-            key={product.id}
-            product={product}
-            index={index}
-            progress={scrollYProgress}
-            range={[index * 0.125, 1]}
-            targetScale={targetScale}
-          />
-        );
-      })}
-    </section>
+    <>
+      <section className="flex flex-col items-center w-full md:hidden lg:mt-4">
+        <VerticalProductCarousel productsList={productsList} />
+      </section>
+      <section className="hidden md:flex flex-col items-center lg:mt-4">
+        <ProductCarousel productsList={productsList} />
+      </section>
+    </>
   );
 };
 
