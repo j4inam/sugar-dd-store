@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={macondo.className} data-theme="luxury">
-        <div className="drawer drawer-end" style={{ height: "calc(100vh - 2rem)" }}>
+        <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col justify-between ">
             <Navbar />

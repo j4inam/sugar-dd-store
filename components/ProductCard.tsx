@@ -1,65 +1,66 @@
-"use client";
-
-import Image from "next/image";
-import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 import { Product } from "@/models/Product";
-import { useRef } from "react";
-import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
-const ProductCard = ({
-  product,
-  index,
-  progress,
-  range,
-  targetScale,
-}: {
+export type ProductCard2Props = {
   product: Product;
-  index: number;
-  progress: MotionValue<number>;
-  range: number[];
-  targetScale: number;
-}) => {
-  const { title, description, price, imageURL, color } = product;
+};
 
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
-  const scale = useTransform(progress, range, [1, targetScale]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
+const textMotion = {
+  rest: {
+    opacity: 0,
+  },
+  hover: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
 
+const imageMotion = {
+  rest: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.2,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
+const ProductCard2 = ({ product }: ProductCard2Props) => {
   return (
-    <div
-      className="h-screen flex items-center justify-center sticky top-0"
-      ref={container}
+    <motion.div
+      className="card w-64 md:w-96 bg-base-100 shadow-xl cursor-pointer"
+      initial="rest"
+      whileHover="hover"
+      whileTap="hover"
     >
-      <motion.div
-        className="card lg:card-side bg-base-100 shadow-xl flex flex-col relative origin-top"
-        style={{
-          backgroundColor: color,
-          scale,
-          top: `calc(-5vh + ${index * 25}px)`,
-        }}
-      >
-        <div className="card-body prose">
-          <h1 className="mb-1">{title}</h1>
-          <p className="my-1">{description}</p>
-          <h1 className="mb-1">${price}</h1>
-          <div className="card-actions">
-            <button className="btn btn-outline">
-              Order Now <ArrowLongRightIcon className="h-6 w-6" />{" "}
-            </button>
-          </div>
-        </div>
-        <div className="m-10 relative overflow-hidden w-96 h-96 rounded-xl">
-          <motion.div className="w-full h-full" style={{ scale: imageScale }}>
-            <Image fill className="object-cover" src={imageURL} alt={title} />
+      <figure>
+        <motion.img
+          src={product.imageURL}
+          alt={product.title}
+          variants={imageMotion}
+          className="rounded-box"
+        />
+      </figure>
+      <div className="p-6 absolute prose h-full">
+        <div className="flex flex-col justify-between h-full">
+          <section>
+            <h2 className="mb-0">{product.title}</h2>
+            <h1>${product.price}</h1>
+            <motion.p className="opacity-0" variants={textMotion}>
+              {product.description}
+            </motion.p>
+          </section>
+          <motion.div className="flex justify-center" variants={textMotion}>
+            <button className="btn btn-neutral md:btn-wide">Buy Now</button>
           </motion.div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
-export default ProductCard;
+export default ProductCard2;
