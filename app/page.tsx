@@ -1,6 +1,5 @@
-"use client";
-
-import ProductCard from "@/components/ProductCard";
+import ProductCarousel from "@/components/ProductCarousel";
+import VerticalProductCarousel from "@/components/VerticalProductCarousel";
 import { Product } from "@/models/Product";
 
 const productsList: Product[] = [
@@ -84,22 +83,14 @@ const productsList: Product[] = [
 
 const Home = () => {
   return (
-    <section className="flex flex-col items-center w-full lg:mt-4">
-      <div className="carousel carousel-center max-w-sm md:max-w-lg p-4 space-x-4 bg-primary rounded-box shadow-xl">
-        {productsList.map((product, idx) => (
-          <div className="carousel-item" id={`item${idx + 1}`} key={product.id}>
-            <ProductCard product={product} />
-          </div>
-        ))}
-      </div>
-      <div className="flex justify-center w-full py-2 gap-2 mt-6">
-        {productsList.map((_, idx) => (
-          <a href={`#item${idx + 1}`} className="btn btn-sm" key={idx}>
-            {idx + 1}
-          </a>
-        ))}
-      </div>
-    </section>
+    <>
+      <section className="flex flex-col items-center w-full md:hidden lg:mt-4">
+        <VerticalProductCarousel productsList={productsList} />
+      </section>
+      <section className="hidden md:flex flex-col items-center lg:mt-4">
+        <ProductCarousel productsList={productsList} />
+      </section>
+    </>
   );
 };
 

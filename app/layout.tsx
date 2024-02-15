@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={macondo.className} data-theme="luxury">
         <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col justify-between ">
+          <div className="drawer-content flex flex-col justify-between h-screen">
             <Navbar />
             {children}
             <Footer />
@@ -38,16 +38,24 @@ export default function RootLayout({
             ></label>
             <ul className="menu p-4 w-48 min-h-full bg-base-200">
               <li>
-                <Link href="/about-us">About Us</Link>
+                <Link href="/about-us">
+                  <button className="btn btn-block">About Us</button>
+                </Link>
               </li>
               <li>
-                <Link href="/contact-us">Contact Us</Link>
+                <Link href="/contact-us">
+                  <button className="btn btn-block">Contact Us</button>
+                </Link>
               </li>
               <li>
-                <Link href="/faq">FAQs</Link>
+                <Link href="/faq">
+                  <button className="btn btn-block">FAQs</button>
+                </Link>
               </li>
               <li>
-                <Link href="/track-order">Track Order</Link>
+                <Link href="/track-order">
+                  <button className="btn btn-primary">Track Order</button>
+                </Link>
               </li>
             </ul>
           </div>

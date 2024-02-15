@@ -1,11 +1,14 @@
+"use client";
+
 import { Product } from "@/models/Product";
-import { motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 export type ProductCard2Props = {
   product: Product;
+  doAnimate?: boolean;
 };
 
-const textMotion = {
+const textMotion: Variants = {
   rest: {
     opacity: 0,
   },
@@ -17,7 +20,7 @@ const textMotion = {
   },
 };
 
-const imageMotion = {
+const imageMotion: Variants = {
   rest: {
     scale: 1,
   },
@@ -29,32 +32,31 @@ const imageMotion = {
   },
 };
 
-const ProductCard2 = ({ product }: ProductCard2Props) => {
+const ProductCard2 = ({ product, doAnimate }: ProductCard2Props) => {
   return (
     <motion.div
-      className="card w-64 md:w-96 bg-base-100 shadow-xl cursor-pointer"
+      className="card w-80 bg-base-100 shadow-xl cursor-pointer"
       initial="rest"
       whileHover="hover"
       whileTap="hover"
     >
-      <figure>
+      <figure className="rounded-box">
         <motion.img
           src={product.imageURL}
           alt={product.title}
-          variants={imageMotion}
-          className="rounded-box"
+          variants={doAnimate ? imageMotion : undefined}
         />
       </figure>
       <div className="p-6 absolute prose h-full">
         <div className="flex flex-col justify-between h-full">
           <section>
-            <h2 className="mb-0">{product.title}</h2>
+            <h2 className="mb-0 mt-0">{product.title}</h2>
             <h1>${product.price}</h1>
-            <motion.p className="opacity-0" variants={textMotion}>
+            <motion.p variants={doAnimate ? textMotion : undefined}>
               {product.description}
             </motion.p>
           </section>
-          <motion.div className="flex justify-center" variants={textMotion}>
+          <motion.div className="flex justify-center" variants={doAnimate ? textMotion : undefined}>
             <button className="btn btn-neutral md:btn-wide">Buy Now</button>
           </motion.div>
         </div>
