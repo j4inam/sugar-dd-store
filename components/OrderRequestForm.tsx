@@ -70,7 +70,7 @@ const OrderRequestForm = () => {
           <div className="label">
             <span className="label-text-alt">{formik.errors.email}</span>
             <span className="label-text-alt">
-              We won't spam your inbox. Promise!
+              We won&apos;t spam your inbox. Promise!
             </span>
           </div>
         </label>
