@@ -4,8 +4,8 @@
 
 body {
   padding: 1rem;
+  min-height: 100vh;
   background-image: url("../public/bg-pattern.jpg");
   background-repeat: repeat repeat;
   background-size: 30%;
-  min-height: 100vh;
 }

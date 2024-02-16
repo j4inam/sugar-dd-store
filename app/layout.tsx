@@ -30,7 +30,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
-          <div className="drawer-side">
+          <div className="md:hidden drawer-side">
             <label
               htmlFor="nav-drawer"
               aria-label="close sidebar"

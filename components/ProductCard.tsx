@@ -2,8 +2,9 @@
 
 import { Product } from "@/models/Product";
 import { Variants, motion } from "framer-motion";
+import Link from "next/link";
 
-export type ProductCard2Props = {
+export type ProductCardProps = {
   product: Product;
   doAnimate?: boolean;
 };
@@ -32,7 +33,7 @@ const imageMotion: Variants = {
   },
 };
 
-const ProductCard2 = ({ product, doAnimate }: ProductCard2Props) => {
+const ProductCard2 = ({ product, doAnimate }: ProductCardProps) => {
   return (
     <motion.div
       className="card w-80 bg-base-100 shadow-xl cursor-pointer"
@@ -56,8 +57,13 @@ const ProductCard2 = ({ product, doAnimate }: ProductCard2Props) => {
               {product.description}
             </motion.p>
           </section>
-          <motion.div className="flex justify-center" variants={doAnimate ? textMotion : undefined}>
-            <button className="btn btn-neutral md:btn-wide">Buy Now</button>
+          <motion.div
+            className="flex justify-center"
+            variants={doAnimate ? textMotion : undefined}
+          >
+            <Link href={`/${product.id}`}>
+              <button className="btn btn-neutral md:btn-wide">Buy Now</button>
+            </Link>
           </motion.div>
         </div>
       </div>
