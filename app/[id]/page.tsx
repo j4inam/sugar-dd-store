@@ -1,4 +1,5 @@
 import { Product } from "@/models/Product";
+import { promises as fs } from "fs";
 
 type ProductDetailsProps = {
   params: {
@@ -6,20 +7,21 @@ type ProductDetailsProps = {
   };
 };
 
-const getProductById = async (id: string) => {
-  const BASE_URL = process.env.VERCEL_ENV
-    ? process.env.VERCEL_URL
-    : process.env.URL;
-  const productRes = await fetch(`${BASE_URL}/api/products/${id}`);
-  if (!productRes.ok) {
-    throw new Error("Failed to fetch product details");
-  }
+const getProductById = async (productId: string) => {
+  const fileData = await fs.readFile(
+    process.cwd() + "/mocks/products-list.json",
+    "utf8"
+  );
+  const productsList: Product[] = JSON.parse(fileData);
+  const productDetails = productsList.find(
+    (product) => product.id === productId
+  );
 
-  return productRes.json();
+  return productDetails;
 };
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
-  const productDetails: Product = await getProductById(params.id);
-  return <h1 className="prose">Product: {productDetails.title}</h1>;
+  const productDetails: Product | undefined = await getProductById(params.id);
+  return <h1 className="prose">Product: {productDetails?.title}</h1>;
 };
 
 export default ProductDetails;
