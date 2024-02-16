@@ -3,7 +3,7 @@ export interface Product {
   title: string;
   price: number;
   quantity: number;
-  quantityUnit: string;
+  quantityUnit: QuantityUnit;
   description: string;
   imageURL: string;
   type: ProductType;
@@ -11,3 +11,5 @@ export interface Product {
 }
 
 export type ProductType = "cake" | "pastry" | "cupcake";
+
+export type QuantityUnit = "kg" | "lb";
