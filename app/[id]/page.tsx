@@ -26,7 +26,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
         <div className="card-body">
           <div className="flex flex-col md:flex-row md:gap-20">
             <section className="flex flex-col w-full items-center md:h-[26rem] lg:h-[28rem] xl:h-[32rem]">
-              <div className="relative h-full w-64 sm:w-full h-80 sm:h-full xl:w-96">
+              <div className="relative h-80 w-64 xl:w-96">
                 <Image
                   src={
                     productDetails?.imageURL || "https://placehold.co/600x400"
