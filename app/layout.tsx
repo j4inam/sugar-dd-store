@@ -25,12 +25,12 @@ export default function RootLayout({
       <body className={macondo.className} data-theme="luxury">
         <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col justify-between h-screen">
+          <div className="drawer-content flex flex-col justify-between h-screen p-4">
             <Navbar />
             {children}
             <Footer />
           </div>
-          <div className="drawer-side">
+          <div className="md:hidden drawer-side">
             <label
               htmlFor="nav-drawer"
               aria-label="close sidebar"

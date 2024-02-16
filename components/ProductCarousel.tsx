@@ -16,7 +16,7 @@ const ProductCarousel = ({ productsList }: ProductCarouselProps) => {
         ))}
       </div>
       <div className="flex justify-center w-full py-2 gap-2 mt-6">
-        {productsList.map((_, idx) => (
+        {productsList?.map((_, idx) => (
           <a href={`#item${idx + 1}`} className="btn btn-sm" key={idx}>
             {idx + 1}
           </a>
