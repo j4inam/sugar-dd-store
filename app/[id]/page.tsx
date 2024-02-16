@@ -1,5 +1,5 @@
 import { Product } from "@/models/Product";
-import { promises as fs } from "fs";
+import productListJson from "@/mocks/products-list.json";
 
 type ProductDetailsProps = {
   params: {
@@ -8,11 +8,7 @@ type ProductDetailsProps = {
 };
 
 const getProductById = async (productId: string) => {
-  const fileData = await fs.readFile(
-    process.cwd() + "/mocks/products-list.json",
-    "utf8"
-  );
-  const productsList: Product[] = JSON.parse(fileData);
+  const productsList: Product[] = productListJson as Product[];
   const productDetails = productsList.find(
     (product) => product.id === productId
   );

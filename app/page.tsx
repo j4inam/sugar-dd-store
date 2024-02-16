@@ -3,14 +3,10 @@ import VerticalProductCarousel from "@/components/VerticalProductCarousel";
 import { Product } from "@/models/Product";
 import { Suspense } from "react";
 import Loading from "./loading";
-import { promises as fs } from "fs";
+import productListJson from "@/mocks/products-list.json";
 
 const getProductsList = async () => {
-  const fileData = await fs.readFile(
-    process.cwd() + "/mocks/products-list.json",
-    "utf8"
-  );
-  return JSON.parse(fileData);
+  return productListJson as Product[];
 };
 
 const Home = async () => {
