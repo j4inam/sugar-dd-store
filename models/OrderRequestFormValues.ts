@@ -1,5 +1,5 @@
 import { number, object, string } from "yup";
-import { QuantityUnit } from "./Product";
+import { QuantityUnit, Size } from "./Product";
 
 export interface OrderRequestFormValues {
   firstName: string;
@@ -9,25 +9,32 @@ export interface OrderRequestFormValues {
   quantity: number;
   unit: QuantityUnit;
   instructions?: string;
+  productId: string;
+  selectedSize?: Size;
+  themeDescription?: string;
+  expectedDeliveryDate?: string;
+  includeSparkler?: boolean;
 }
 
 export const orderRequestFormSchema = object({
-  firstName: string().required({
-    message: "First name is required.",
-  }),
-  email: string().email(),
+  firstName: string().required("First name is required."),
+  email: string().required("Email is required.").email("Email is invalid."),
   mobile: string()
-    .required({
-      message: "Mobile number is required.",
-    })
-    .matches(/^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, {
-      excludeEmptyString: true,
-      message: "Mobile number appears to be invalid.",
-    }),
-  quantity: number()
-    .required({
-      message: "Quantity is required",
-    })
-    .positive()
-    .min(0.5),
+    .required("Mobile number is required.")
+    .matches(
+      /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+      "Mobile number is invalid."
+    ),
+  quantity: number().required("Quantity is required.").positive().min(0.5, "Minimum order quantity is 0.5"),
+  instructions: string().max(
+    300,
+    "Please limit instructions to 300 chars. or less."
+  ),
+  themeDescription: string().max(
+    300,
+    "Please limit instructions to 300 chars. or less."
+  ),
+  expectedDeliveryDate: string().required(
+    "Expected delivery date is required."
+  ),
 });

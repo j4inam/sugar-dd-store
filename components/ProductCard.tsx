@@ -62,7 +62,7 @@ const ProductCard2 = ({ product, doAnimate }: ProductCardProps) => {
             variants={doAnimate ? textMotion : undefined}
           >
             <Link href={`/${product.id}`}>
-              <button className="btn btn-neutral md:btn-wide">Buy Now</button>
+              <button className="btn btn-neutral md:btn-wide">Order Now</button>
             </Link>
           </motion.div>
         </div>

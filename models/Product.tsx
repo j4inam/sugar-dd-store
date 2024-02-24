@@ -8,8 +8,11 @@ export interface Product {
   imageURL: string;
   type: ProductType;
   color: string;
+  size?: Size
 }
 
 export type ProductType = "cake" | "pastry" | "cupcake";
 
 export type QuantityUnit = "kg" | "lb";
+
+export type Size = "6in" | "8in"

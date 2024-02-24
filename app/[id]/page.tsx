@@ -49,7 +49,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
             <section className="prose">
               <h2>Create Order Request</h2>
             </section>
-            <OrderRequestForm />
+            <OrderRequestForm productId={params.id} />
           </section>
         </div>
       </div>
