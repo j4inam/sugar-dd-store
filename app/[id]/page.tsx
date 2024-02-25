@@ -67,7 +67,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
                   <div className="max-w-md">
                     <h1 className="mb-5 text-5xl font-bold">Get Yours Now</h1>
                     <p className="mb-5">
-                      Let's bake you some sweetness. Please click "Get Started"
+                      Let\'s bake you some sweetness. Please click "Get Started"
                       below to login and submit your order.
                     </p>
                     <LoginLink postLoginRedirectURL={`/${params.id}`}>
