@@ -1,5 +1,4 @@
 import { number, object, string } from "yup";
-import { QuantityUnit, Size } from "./Product";
 
 export interface OrderRequestFormValues {
   firstName: string;
@@ -7,10 +6,10 @@ export interface OrderRequestFormValues {
   email?: string;
   mobile: string;
   quantity: number;
-  unit: QuantityUnit;
+  unit: string;
   instructions?: string;
   productId: string;
-  selectedSize?: Size;
+  selectedSize?: string;
   themeDescription?: string;
   expectedDeliveryDate?: string;
   includeSparkler?: boolean;
