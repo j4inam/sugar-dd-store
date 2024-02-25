@@ -8,15 +8,18 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
-import Dialog from "./Dialog";
-import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
 import Link from "next/link";
+import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
+import Dialog from "./Dialog";
 
 type OrderRequestFormProps = {
   productId: string;
+  firstNameInitValue?: string;
+  lastNameInitValue?: string;
+  emailInitValue?: string;
 };
 
-const OrderRequestForm = ({ productId }: OrderRequestFormProps) => {
+const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, emailInitValue }: OrderRequestFormProps) => {
   const [expectedDeliveryDate, setExpectedDeliveryDate] =
     useState<DateValueType>({
       startDate: null,
@@ -44,9 +47,9 @@ const OrderRequestForm = ({ productId }: OrderRequestFormProps) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: firstNameInitValue,
+      lastName: lastNameInitValue,
+      email: emailInitValue,
       mobile: "",
       quantity: 1,
       unit: "lb",
