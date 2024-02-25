@@ -1,18 +1,14 @@
-export interface Product {
+export type Product = {
   id: string;
   title: string;
   price: number;
   quantity: number;
-  quantityUnit: QuantityUnit;
-  description: string;
+  quantityUnit: string;
+  quantityEditable: boolean;
+  quantityUnitVariants: string[];
   imageURL: string;
-  type: ProductType;
-  color: string;
-  size?: Size
-}
-
-export type ProductType = "cake" | "pastry" | "cupcake";
-
-export type QuantityUnit = "kg" | "lb";
-
-export type Size = "6in" | "8in"
+  description: string | null;
+  productVariants: string[];
+  sizeVariants: string[];
+  createdAt: Date;
+};

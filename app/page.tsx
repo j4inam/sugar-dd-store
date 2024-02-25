@@ -3,10 +3,12 @@ import VerticalProductCarousel from "@/components/VerticalProductCarousel";
 import { Product } from "@/models/Product";
 import { Suspense } from "react";
 import Loading from "./loading";
-import productListJson from "@/mocks/products-list.json";
+import prismaClient from "@/models/db";
 
 const getProductsList = async () => {
-  return productListJson as Product[];
+  const products = await prismaClient.product.findMany();
+
+  return products;
 };
 
 const Home = async () => {

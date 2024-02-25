@@ -4,6 +4,7 @@ import Image from "next/image";
 import OrderRequestForm from "@/components/OrderRequestForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import prismaClient from "@/models/db";
 
 type ProductDetailsProps = {
   params: {
@@ -12,15 +13,15 @@ type ProductDetailsProps = {
 };
 
 const getProductById = async (productId: string) => {
-  const productsList: Product[] = productListJson as Product[];
-  const productDetails = productsList.find(
-    (product) => product.id === productId
-  );
-
+  const productDetails = await prismaClient.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
   return productDetails;
 };
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
-  const productDetails: Product | undefined = await getProductById(params.id);
+  const productDetails: Product | null = await getProductById(params.id);
   const { isAuthenticated, getUser } = getKindeServerSession();
   const isUserLoggedIn = await isAuthenticated();
   let userData;
