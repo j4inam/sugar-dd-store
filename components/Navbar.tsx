@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bars3BottomRightIcon } from "@heroicons/react/16/solid";
+import UserAccountActions from "./UserAccountActions";
 
 const Navbar = () => {
   return (
@@ -37,9 +37,10 @@ const Navbar = () => {
             <Link href="/faq">FAQs</Link>
           </li>
           <li>
-            <Link href="/track-order">Track Order</Link>
+            <Link href="/orders">View Orders</Link>
           </li>
         </ul>
+        <UserAccountActions />
       </div>
     </div>
   );

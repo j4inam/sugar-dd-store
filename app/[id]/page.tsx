@@ -2,6 +2,8 @@ import { Product } from "@/models/Product";
 import productListJson from "@/mocks/products-list.json";
 import Image from "next/image";
 import OrderRequestForm from "@/components/OrderRequestForm";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 type ProductDetailsProps = {
   params: {
@@ -19,6 +21,12 @@ const getProductById = async (productId: string) => {
 };
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
   const productDetails: Product | undefined = await getProductById(params.id);
+  const { isAuthenticated, getUser } = getKindeServerSession();
+  const isUserLoggedIn = await isAuthenticated();
+  let userData;
+  if (isUserLoggedIn) {
+    userData = await getUser();
+  }
 
   return (
     <section className="flex justify-center my-6">
@@ -46,10 +54,42 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
             </section>
           </div>
           <section className="flex flex-col justify-center items-center mt-6">
-            <section className="prose">
-              <h2>Create Order Request</h2>
-            </section>
-            <OrderRequestForm productId={params.id} />
+            {!isUserLoggedIn && (
+              <div
+                className="hero h-80"
+                style={{
+                  backgroundImage:
+                    "url(https://source.unsplash.com/round-cake-on-brown-wooden-cake-stand-enVg_Vtsw1c)",
+                }}
+              >
+                <div className="hero-overlay bg-opacity-60"></div>
+                <div className="hero-content text-center text-base-content">
+                  <div className="max-w-md">
+                    <h1 className="mb-5 text-5xl font-bold">Get Yours Now</h1>
+                    <p className="mb-5">
+                      Let&apos;s bake you some sweetness. Please click &quot;Get
+                      Started&quot; below to login and submit your order.
+                    </p>
+                    <LoginLink postLoginRedirectURL={`/${params.id}`}>
+                      <button className="btn btn-primary">Get Started</button>
+                    </LoginLink>
+                  </div>
+                </div>
+              </div>
+            )}
+            {isUserLoggedIn && (
+              <>
+                <section className="prose">
+                  <h2>Create Order Request</h2>
+                </section>
+                <OrderRequestForm
+                  productId={params.id}
+                  firstNameInitValue={userData?.given_name || ""}
+                  lastNameInitValue={userData?.family_name || ""}
+                  emailInitValue={userData?.email || ""}
+                />
+              </>
+            )}
           </section>
         </div>
       </div>
