@@ -1,6 +1,5 @@
 const FAQ = () => {
-    return <></>;
-  };
-  
-  export default FAQ;
-  
+  return <></>;
+};
+
+export default FAQ;
