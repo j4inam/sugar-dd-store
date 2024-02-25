@@ -1,5 +1,4 @@
 import { Product } from "@/models/Product";
-import productListJson from "@/mocks/products-list.json";
 import Image from "next/image";
 import OrderRequestForm from "@/components/OrderRequestForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
