@@ -10,6 +10,7 @@ export interface OrderRequestFormValues {
   instructions?: string;
   productId: string;
   selectedSize?: string;
+  selectedVariant?: string;
   themeDescription?: string;
   expectedDeliveryDate?: string;
   includeSparkler?: boolean;

@@ -52,11 +52,6 @@ export default async function RootLayout({
                 </Link>
               </li>
               <li>
-                <Link href="/contact-us">
-                  <button className="btn btn-block">Contact Us</button>
-                </Link>
-              </li>
-              <li>
                 <Link href="/faq">
                   <button className="btn btn-block">FAQs</button>
                 </Link>

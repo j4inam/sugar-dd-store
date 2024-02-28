@@ -83,7 +83,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
                   <h2>Create Order Request</h2>
                 </section>
                 <OrderRequestForm
-                  productId={params.id}
+                  product={productDetails}
                   firstNameInitValue={userData?.given_name || ""}
                   lastNameInitValue={userData?.family_name || ""}
                   emailInitValue={userData?.email || ""}
