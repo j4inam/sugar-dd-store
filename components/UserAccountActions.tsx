@@ -2,6 +2,7 @@ import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { DEFAULT_USER_AVATAR } from "@/constants";
+import Image from "next/image";
 
 const UserAccountActions = async () => {
   const { isAuthenticated, getUser } = getKindeServerSession();
@@ -17,8 +18,13 @@ const UserAccountActions = async () => {
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full">
-              <img alt="Profile Image" src={DEFAULT_USER_AVATAR} />
+            <div className="w-10">
+              <Image
+                fill={true}
+                className="rounded-full"
+                alt="Profile Image"
+                src={DEFAULT_USER_AVATAR}
+              />
             </div>
           </div>
           <h2 className="md:hidden text-xl">Login</h2>
@@ -36,7 +42,9 @@ const UserAccountActions = async () => {
           className="btn btn-ghost btn-circle avatar"
         >
           <div className="w-10 rounded-full">
-            <img
+            <Image
+              fill={true}
+              className="rounded-full"
               alt="Profile Image"
               src={userData?.picture || DEFAULT_USER_AVATAR}
             />
