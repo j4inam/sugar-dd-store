@@ -1,38 +1,40 @@
 "use client";
 
+import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 import {
   OrderRequestFormValues,
   orderRequestFormSchema,
 } from "@/models/OrderRequestFormValues";
-import { useFormik } from "formik";
-import { useState } from "react";
-import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
-import dayjs from "dayjs";
+
+import Dialog from "./Dialog";
 import Link from "next/link";
 import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
-import Dialog from "./Dialog";
+import { Prisma } from "@prisma/client";
+import { Product } from "@/models/Product";
+import dayjs from "dayjs";
+import { useFormik } from "formik";
+import { useState } from "react";
 
 type OrderRequestFormProps = {
-  productId: string;
+  product: Product | null;
   firstNameInitValue?: string;
   lastNameInitValue?: string;
   emailInitValue?: string;
+  userId: string;
 };
 
-const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, emailInitValue }: OrderRequestFormProps) => {
+const OrderRequestForm = ({
+  product,
+  firstNameInitValue,
+  lastNameInitValue,
+  emailInitValue,
+  userId,
+}: OrderRequestFormProps) => {
   const [expectedDeliveryDate, setExpectedDeliveryDate] =
     useState<DateValueType>({
       startDate: null,
       endDate: null,
     });
-
-  const handleExpectedDeliveryDateChange = (newDate: DateValueType) => {
-    setExpectedDeliveryDate(newDate);
-    formik.setFieldValue(
-      "expectedDeliveryDate",
-      dayjs(newDate?.startDate, "YYYY-MM-DD").format()
-    );
-  };
 
   const showDialog = (dialogId: string) => {
     const modal: any = document.getElementById(dialogId);
@@ -45,23 +47,40 @@ const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, em
     </Link>
   );
 
+  const handleExpectedDeliveryDateChange = (newDate: DateValueType) => {
+    setExpectedDeliveryDate(newDate);
+    formik.setFieldValue(
+      "expectedDeliveryDate",
+      dayjs(newDate?.startDate, "YYYY-MM-DD").format()
+    );
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: firstNameInitValue,
       lastName: lastNameInitValue,
       email: emailInitValue,
       mobile: "",
-      quantity: 1,
-      unit: "lb",
+      quantity: product?.quantity,
+      unit: product?.quantityUnit,
       instructions: "",
-      productId: productId,
-      selectedSize: "6in",
+      productId: product?.id,
+      selectedSize: product?.sizeVariants[0],
+      selectedVariant: product?.productVariants[0],
       themeDescription: "",
       expectedDeliveryDate: "",
       includeSparkler: true,
     } as OrderRequestFormValues,
-    onSubmit: (values: OrderRequestFormValues) => {
-      console.log(values);
+    onSubmit: async (values: OrderRequestFormValues) => {
+      const order: Prisma.OrdersCreateInput = {
+        ...values,
+        userId,
+        mobile: values.mobile.toString(),
+      };
+      await fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify(order),
+      });
       showDialog(ORDER_CONFIRMATION_DIALOG_ID);
     },
     validationSchema: orderRequestFormSchema,
@@ -70,10 +89,25 @@ const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, em
   return (
     <>
       <div className="prose w-full md:w-3/4 lg:w-1/2">
-        <form
-          onSubmit={formik.handleSubmit}
-          onChange={() => console.log(formik)}
-        >
+        <form onSubmit={formik.handleSubmit}>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Select Type</span>
+            </div>
+            <select
+              id="selectedVariant"
+              name="selectedVariant"
+              value={formik.values.selectedVariant}
+              onChange={formik.handleChange}
+              className="select bg-primary select-secondary w-full"
+            >
+              {product?.productVariants.map((productVariant) => (
+                <option key={productVariant} value={productVariant}>
+                  {productVariant}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">First Name</span>
@@ -158,46 +192,54 @@ const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, em
               </div>
             )}
           </label>
-          <div className="flex gap-4">
-            <label className="form-control w-full">
-              <div className="label">
-                <span className="label-text">Weight / Quantity</span>
-              </div>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                placeholder="1"
-                className={`input input-bordered bg-primary w-full ${
-                  formik.errors.quantity ? "input-error" : "input-secondary"
-                }`}
-                value={formik.values.quantity}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.quantity && (
+          {product?.quantityEditable && (
+            <div className="flex gap-4">
+              <label className="form-control w-full">
                 <div className="label">
-                  <span className="label-text-alt text-error">
-                    {formik.errors.quantity}
-                  </span>
+                  <span className="label-text">Weight / Quantity</span>
                 </div>
-              )}
-            </label>
-            <label className="form-control w-full">
-              <div className="label">
-                <span className="label-text">Unit</span>
-              </div>
-              <select
-                id="unit"
-                name="unit"
-                value={formik.values.unit}
-                onChange={formik.handleChange}
-                className="select bg-primary select-secondary w-full max-w-xs"
-              >
-                <option value="lb">lb</option>
-                <option value="kg">kg</option>
-              </select>
-            </label>
-          </div>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="1"
+                  className={`input input-bordered bg-primary w-full ${
+                    formik.errors.quantity ? "input-error" : "input-secondary"
+                  }`}
+                  value={formik.values.quantity}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.quantity && (
+                  <div className="label">
+                    <span className="label-text-alt text-error">
+                      {formik.errors.quantity}
+                    </span>
+                  </div>
+                )}
+              </label>
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Unit</span>
+                </div>
+                <select
+                  id="unit"
+                  name="unit"
+                  value={formik.values.unit}
+                  onChange={formik.handleChange}
+                  className="select bg-primary select-secondary w-full max-w-xs"
+                >
+                  {product.quantityUnitVariants.map((quantityUnitVariant) => (
+                    <option
+                      key={quantityUnitVariant}
+                      value={quantityUnitVariant}
+                    >
+                      {quantityUnitVariant}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Select a Size</span>
@@ -209,8 +251,11 @@ const OrderRequestForm = ({ productId, firstNameInitValue, lastNameInitValue, em
               onChange={formik.handleChange}
               className="select bg-primary select-secondary w-full"
             >
-              <option value="6in">6in</option>
-              <option value="8in">8in</option>
+              {product?.sizeVariants.map((sizeVariant) => (
+                <option key={sizeVariant} value={sizeVariant}>
+                  {sizeVariant}
+                </option>
+              ))}
             </select>
           </label>
           <label className="form-control w-full">

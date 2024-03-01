@@ -2,6 +2,7 @@
 
 import { Product } from "@/models/Product";
 import { Variants, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export type ProductCardProps = {
@@ -42,11 +43,12 @@ const ProductCard2 = ({ product, doAnimate }: ProductCardProps) => {
       whileTap="hover"
     >
       <figure className="rounded-box">
-        <motion.img
-          src={product.imageURL}
-          alt={product.title}
+        <motion.div
+          className="relative h-[32rem] w-96"
           variants={doAnimate ? imageMotion : undefined}
-        />
+        >
+          <Image src={product.imageURL} alt={product.title} fill={true} />
+        </motion.div>
       </figure>
       <div className="p-6 absolute prose h-full">
         <div className="flex flex-col justify-between h-full">

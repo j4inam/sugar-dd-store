@@ -9,10 +9,11 @@ export interface OrderRequestFormValues {
   unit: string;
   instructions?: string;
   productId: string;
-  selectedSize?: string;
+  selectedSize: string;
+  selectedVariant: string;
   themeDescription?: string;
-  expectedDeliveryDate?: string;
-  includeSparkler?: boolean;
+  expectedDeliveryDate: string;
+  includeSparkler: boolean;
 }
 
 export const orderRequestFormSchema = object({
