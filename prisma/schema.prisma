@@ -23,6 +23,7 @@ model Orders {
   selectedVariant      String
   themeDescription     String?
   unit                 String
+  userId               String
 }
 
 model Products {
