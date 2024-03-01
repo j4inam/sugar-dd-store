@@ -10,7 +10,7 @@ export async function POST(request: Request, response: Response) {
   await prismaClient.orders.create({ data: order });
 
   const { data, error } = await resend.emails.send({
-    from: "Acme <system@sugardd.co>",
+    from: "Sugar DD <noreply@resend.dev>",
     to: ["j4inam@gmail.com"],
     subject: "[Sugar DD] New Order Request!",
     text: `New Order Request Received from ${order.firstName} ${order.lastName} (${order.mobile})`,
