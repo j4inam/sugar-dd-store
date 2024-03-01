@@ -12,7 +12,7 @@ type ProductDetailsProps = {
 };
 
 const getProductById = async (productId: string) => {
-  const productDetails = await prismaClient.product.findUnique({
+  const productDetails = await prismaClient.products.findUnique({
     where: {
       id: productId,
     },

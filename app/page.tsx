@@ -6,7 +6,7 @@ import Loading from "./loading";
 import prismaClient from "@/models/db";
 
 const getProductsList = async () => {
-  const products = await prismaClient.product.findMany();
+  const products = await prismaClient.products.findMany();
 
   return products;
 };
