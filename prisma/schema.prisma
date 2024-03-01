@@ -17,7 +17,7 @@ model Orders {
   lastName             String?
   mobile               String
   productId            String   @db.ObjectId
-  product              Products @relation(fields: [productId], references: [id])
+  product              Products? @relation(fields: [productId], references: [id])
   quantity             Int
   selectedSize         String
   selectedVariant      String

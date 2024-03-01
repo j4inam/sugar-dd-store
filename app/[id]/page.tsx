@@ -1,8 +1,9 @@
-import { Product } from "@/models/Product";
 import Image from "next/image";
-import OrderRequestForm from "@/components/OrderRequestForm";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import OrderRequestForm from "@/components/OrderRequestForm";
+import { Product } from "@/models/Product";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prismaClient from "@/models/db";
 
 type ProductDetailsProps = {
@@ -19,14 +20,12 @@ const getProductById = async (productId: string) => {
   });
   return productDetails;
 };
+
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
   const productDetails: Product | null = await getProductById(params.id);
   const { isAuthenticated, getUser } = getKindeServerSession();
   const isUserLoggedIn = await isAuthenticated();
-  let userData;
-  if (isUserLoggedIn) {
-    userData = await getUser();
-  }
+  let userData: KindeUser | null = await getUser();
 
   return (
     <section className="flex justify-center my-6">
@@ -87,6 +86,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
                   firstNameInitValue={userData?.given_name || ""}
                   lastNameInitValue={userData?.family_name || ""}
                   emailInitValue={userData?.email || ""}
+                  userId={userData?.id || ""}
                 />
               </>
             )}

@@ -1,23 +1,26 @@
 "use client";
 
+import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 import {
   OrderRequestFormValues,
   orderRequestFormSchema,
 } from "@/models/OrderRequestFormValues";
-import { useFormik } from "formik";
-import { useState } from "react";
-import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
-import dayjs from "dayjs";
+
+import Dialog from "./Dialog";
 import Link from "next/link";
 import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
-import Dialog from "./Dialog";
+import { Prisma } from "@prisma/client";
 import { Product } from "@/models/Product";
+import dayjs from "dayjs";
+import { useFormik } from "formik";
+import { useState } from "react";
 
 type OrderRequestFormProps = {
   product: Product | null;
   firstNameInitValue?: string;
   lastNameInitValue?: string;
   emailInitValue?: string;
+  userId: string;
 };
 
 const OrderRequestForm = ({
@@ -25,20 +28,13 @@ const OrderRequestForm = ({
   firstNameInitValue,
   lastNameInitValue,
   emailInitValue,
+  userId,
 }: OrderRequestFormProps) => {
   const [expectedDeliveryDate, setExpectedDeliveryDate] =
     useState<DateValueType>({
       startDate: null,
       endDate: null,
     });
-
-  const handleExpectedDeliveryDateChange = (newDate: DateValueType) => {
-    setExpectedDeliveryDate(newDate);
-    formik.setFieldValue(
-      "expectedDeliveryDate",
-      dayjs(newDate?.startDate, "YYYY-MM-DD").format()
-    );
-  };
 
   const showDialog = (dialogId: string) => {
     const modal: any = document.getElementById(dialogId);
@@ -50,6 +46,14 @@ const OrderRequestForm = ({
       <button className="btn btn-accent">View Orders</button>
     </Link>
   );
+
+  const handleExpectedDeliveryDateChange = (newDate: DateValueType) => {
+    setExpectedDeliveryDate(newDate);
+    formik.setFieldValue(
+      "expectedDeliveryDate",
+      dayjs(newDate?.startDate, "YYYY-MM-DD").format()
+    );
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -67,8 +71,17 @@ const OrderRequestForm = ({
       expectedDeliveryDate: "",
       includeSparkler: true,
     } as OrderRequestFormValues,
-    onSubmit: (values: OrderRequestFormValues) => {
+    onSubmit: async (values: OrderRequestFormValues) => {
       console.log(values);
+      const order: Prisma.OrdersCreateInput = {
+        ...values,
+        userId,
+        mobile: values.mobile.toString(),
+      };
+      await fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify(order),
+      });
       showDialog(ORDER_CONFIRMATION_DIALOG_ID);
     },
     validationSchema: orderRequestFormSchema,
@@ -77,10 +90,7 @@ const OrderRequestForm = ({
   return (
     <>
       <div className="prose w-full md:w-3/4 lg:w-1/2">
-        <form
-          onSubmit={formik.handleSubmit}
-          onChange={() => console.log(formik)}
-        >
+        <form onSubmit={formik.handleSubmit}>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Select Type</span>

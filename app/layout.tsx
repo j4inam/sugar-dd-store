@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Comic_Neue } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,8 +8,7 @@ import UserAccountActions from "@/components/UserAccountActions";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const comicNeue = Comic_Neue({
-  weight: "400",
+const quicksand = Quicksand({
   subsets: ["latin"],
   preload: true
 });
@@ -29,7 +28,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={comicNeue.className} data-theme="luxury">
+      <body className={quicksand.className} data-theme="luxury">
         <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col justify-between h-screen p-4">
