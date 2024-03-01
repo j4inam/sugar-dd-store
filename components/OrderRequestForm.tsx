@@ -72,7 +72,6 @@ const OrderRequestForm = ({
       includeSparkler: true,
     } as OrderRequestFormValues,
     onSubmit: async (values: OrderRequestFormValues) => {
-      console.log(values);
       const order: Prisma.OrdersCreateInput = {
         ...values,
         userId,
