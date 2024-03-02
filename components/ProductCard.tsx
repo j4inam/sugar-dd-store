@@ -1,9 +1,10 @@
 "use client";
 
-import { Product } from "@/models/Product";
 import { Variants, motion } from "framer-motion";
+
 import Image from "next/image";
 import Link from "next/link";
+import { Product } from "@/models/Product";
 
 export type ProductCardProps = {
   product: Product;
@@ -34,7 +35,7 @@ const imageMotion: Variants = {
   },
 };
 
-const ProductCard2 = ({ product, doAnimate }: ProductCardProps) => {
+const ProductCard = ({ product, doAnimate }: ProductCardProps) => {
   return (
     <motion.div
       className="card w-80 bg-base-100 shadow-xl cursor-pointer"
@@ -73,4 +74,4 @@ const ProductCard2 = ({ product, doAnimate }: ProductCardProps) => {
   );
 };
 
-export default ProductCard2;
+export default ProductCard;

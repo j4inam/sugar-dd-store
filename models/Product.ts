@@ -11,4 +11,5 @@ export type Product = {
   productVariants: string[];
   sizeVariants: string[];
   createdAt: Date;
+  updatedAt: Date;
 };
