@@ -19,14 +19,14 @@ enum OrderStatus {
 model Orders {
   id                   String      @id @default(auto()) @map("_id") @db.ObjectId
   email                String?
-  expectedDeliveryDate DateTime    @db.Date
+  expectedDeliveryDate DateTime
   firstName            String
   includeSparkler      Boolean
   instructions         String?
   lastName             String?
   mobile               String
   productId            String      @db.ObjectId
-  product              Products?    @relation(fields: [productId], references: [id])
+  product              Products?   @relation(fields: [productId], references: [id])
   quantity             Int
   selectedSize         String
   selectedVariant      String
@@ -34,7 +34,7 @@ model Orders {
   unit                 String
   userId               String
   orderAmount          Float?
-  createdAt            DateTime?    @db.Date
+  createdAt            DateTime?   @default(now())
   updatedAt            DateTime    @updatedAt
   status               OrderStatus @default(SUBMITTED)
 }
@@ -52,6 +52,6 @@ model Products {
   sizeVariants         String[]
   title                String
   orders               Orders[]
-  createdAt            DateTime @db.Date
+  createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 }
