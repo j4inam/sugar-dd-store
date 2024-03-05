@@ -11,6 +11,9 @@ const getOrdersList = async (userId?: string) => {
     include: {
       product: true,
     },
+    orderBy: {
+      createdAt: 'desc'
+    }
   });
 
   return orders;

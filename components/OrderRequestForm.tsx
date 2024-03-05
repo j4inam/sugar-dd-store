@@ -76,7 +76,12 @@ const OrderRequestForm = ({
         ...values,
         userId,
         mobile: values.mobile.toString(),
+        expectedDeliveryDate: dayjs(
+          values.expectedDeliveryDate,
+          "YYYY-MM-DD"
+        ).toISOString(),
       };
+      console.log("Order", order)
       await fetch("/api/orders", {
         method: "POST",
         body: JSON.stringify(order),
