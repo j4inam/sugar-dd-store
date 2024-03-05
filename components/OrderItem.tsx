@@ -18,7 +18,7 @@ const OrderItem = ({ order }: OrderItemsProps) => {
         <h2 className="card-title">{order.product?.title}</h2>
         <OrderStatusBadge status={order.status} />
         <p className="my-2">
-          Order Date: {dayjs(order.createdAt).format("MM-DD-YYYY")}
+          Order Date: {dayjs(order.createdAt).format("DD MMM 'YY")}
         </p>
         {Object.keys(TSOrderStatus).indexOf(order.status) >=
           Object.keys(TSOrderStatus).indexOf(TSOrderStatus.CONFIRMED) && (
