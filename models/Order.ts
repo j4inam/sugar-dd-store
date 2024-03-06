@@ -14,6 +14,7 @@ export type OrdersSelect = {
   id: string;
   email: string | null;
   expectedDeliveryDate: Date;
+  confirmedDeliveryDate: Date | null;
   firstName: string;
   lastName: string | null;
   includeSparkler: boolean;
