@@ -1,6 +1,7 @@
 import { OrdersSelect, TSOrderStatus } from "@/models/Order";
 
 import Image from "next/image";
+import Link from "next/link";
 import OrderStatusBadge from "./OrderStatusBadge";
 import dayjs from "dayjs";
 
@@ -25,7 +26,11 @@ const OrderItem = ({ order }: OrderItemsProps) => {
           <p>Amount: ${order.orderAmount}</p>
         )}
         <div className="card-actions justify-end">
-          <button className="btn btn-primary btn-outline">View Details</button>
+          <Link href={`/orders/${order.id}`}>
+            <button className="btn btn-primary btn-outline">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

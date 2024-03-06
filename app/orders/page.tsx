@@ -1,3 +1,5 @@
+import EmptyList from "@/components/EmptyList";
+import Link from "next/link";
 import OrderItem from "@/components/OrderItem";
 import { OrdersSelect } from "@/models/Order";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -12,8 +14,8 @@ const getOrdersList = async (userId?: string) => {
       product: true,
     },
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: "desc",
+    },
   });
 
   return orders;
@@ -23,17 +25,37 @@ const Orders = async () => {
   const { getUser } = getKindeServerSession();
   let userData = await getUser();
   const ordersList: OrdersSelect[] = await getOrdersList(userData?.id);
-  
+
+  const emptyCartActions = (
+    <Link href={"/"}>
+      <button className="btn">Browse our cakes!</button>
+    </Link>
+  );
+
   return (
     <section className="flex justify-center my-6">
       <div className="card bg-primary shadow-xl rounded-box w-full overflow-y-scroll h-[56rem] scroller">
         <div className="card-body">
           <h1 className="text-2xl">Your Orders</h1>
-          <section className="grid grid-cols-1 lg: md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-            {ordersList.map((order: OrdersSelect) => 
-              <OrderItem order={order} key={order.id} />
-            )}
-          </section>
+          {ordersList.length === 0 && (
+            <section>
+              {
+                <EmptyList
+                  text={
+                    "Your dessert paradise awaits! Fill your hearts with the sweetness of our fresh-baked, handmade cakes and treats."
+                  }
+                  emptyListActions={emptyCartActions}
+                />
+              }
+            </section>
+          )}
+          {ordersList.length !== 0 && (
+            <section className="grid grid-cols-1 lg: md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+              {ordersList.map((order: OrdersSelect) => (
+                <OrderItem order={order} key={order.id} />
+              ))}
+            </section>
+          )}
         </div>
       </div>
     </section>

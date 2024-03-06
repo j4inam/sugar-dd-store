@@ -17,26 +17,27 @@ enum OrderStatus {
 }
 
 model Orders {
-  id                   String      @id @default(auto()) @map("_id") @db.ObjectId
-  email                String?
-  expectedDeliveryDate DateTime
-  firstName            String
-  includeSparkler      Boolean
-  instructions         String?
-  lastName             String?
-  mobile               String
-  productId            String      @db.ObjectId
-  product              Products?   @relation(fields: [productId], references: [id])
-  quantity             Int
-  selectedSize         String
-  selectedVariant      String
-  themeDescription     String?
-  unit                 String
-  userId               String
-  orderAmount          Float?
-  createdAt            DateTime?   @default(now())
-  updatedAt            DateTime    @updatedAt
-  status               OrderStatus @default(SUBMITTED)
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  email                 String?
+  expectedDeliveryDate  DateTime
+  confirmedDeliveryDate DateTime?
+  firstName             String
+  includeSparkler       Boolean
+  instructions          String?
+  lastName              String?
+  mobile                String
+  productId             String      @db.ObjectId
+  product               Products?   @relation(fields: [productId], references: [id])
+  quantity              Int
+  selectedSize          String
+  selectedVariant       String
+  themeDescription      String?
+  unit                  String
+  userId                String
+  orderAmount           Float?
+  createdAt             DateTime?   @default(now())
+  updatedAt             DateTime    @updatedAt
+  status                OrderStatus @default(SUBMITTED)
 }
 
 model Products {

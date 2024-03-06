@@ -42,7 +42,7 @@ const OrderRequestForm = ({
   };
 
   const orderConfirmationDialogActions = (
-    <Link href="/orders">
+    <Link href={{ pathname: "/orders", query: { r: 1 } }}>
       <button className="btn btn-accent">View Orders</button>
     </Link>
   );
@@ -81,7 +81,6 @@ const OrderRequestForm = ({
           "YYYY-MM-DD"
         ).toISOString(),
       };
-      console.log("Order", order)
       await fetch("/api/orders", {
         method: "POST",
         body: JSON.stringify(order),
