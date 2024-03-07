@@ -4,7 +4,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const { isAuthenticated } = getKindeServerSession();
+  const { getPermission, isAuthenticated } = getKindeServerSession();
 
   if (!(await isAuthenticated())) {
     return NextResponse.redirect(
@@ -14,8 +14,15 @@ export async function middleware(request: NextRequest) {
       )
     );
   }
+
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    const adminPermission = await getPermission("store:admin");
+    if (!adminPermission?.isGranted) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
 }
 
 export const config = {
-  matcher: ["/orders", "/api/orders", "/orders/:path*"],
+  matcher: ["/orders", "/api/orders", "/orders/:path*", "/admin/:path*"],
 };
