@@ -76,7 +76,7 @@ const UserAccountActions = async () => {
                   clipRule="evenodd"
                 />
               </svg>
-              Admin Dashboard
+              Store Manager
             </Link>
           </li>
         )}
