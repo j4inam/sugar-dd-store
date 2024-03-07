@@ -47,7 +47,9 @@ export default async function AdminLayout({
                 </label>
               </div>
               <div className="navbar-center">
-                <a className="btn btn-ghost text-xl">Sugar DD Admin</a>
+                <Link href={"/admin-dash"} className="btn btn-ghost text-xl">
+                  Sugar DD Admin
+                </Link>
               </div>
               <div className="navbar-end"></div>
             </div>
