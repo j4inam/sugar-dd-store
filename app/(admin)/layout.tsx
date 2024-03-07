@@ -49,6 +49,7 @@ export default async function AdminLayout({
               <div className="navbar-center">
                 <a className="btn btn-ghost text-xl">Sugar DD Admin</a>
               </div>
+              <div className="navbar-end"></div>
             </div>
             <section className="p-4">{children}</section>
           </div>

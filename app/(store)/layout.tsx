@@ -44,14 +44,15 @@ export default async function StoreLayout({
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu px-0 py-2 w-60 min-h-full bg-base-200">
+            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               <li>
                 <h1 className="text-xl font-bold">Sugar DD Store</h1>
               </li>
-              <div className="divider"></div>
+              <div className="divider mb-0"></div>
               <li>
                 <UserAccountActions />
               </li>
+              <div className="divider my-0"></div>
               <li>
                 <Link className="text-xl leading-10 my-2" href="/about-us">
                   About Us
