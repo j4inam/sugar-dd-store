@@ -55,7 +55,7 @@ const Footer = () => {
         </footer>
       </section>
       <section className="hidden md:flex">
-        <footer className="footer p-10 bg-base-100 rounded-xl">
+        <footer className="footer p-10 bg-base-100 rounded-xl mb-6">
           <aside>
             <svg
               width="50"
