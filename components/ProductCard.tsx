@@ -64,7 +64,7 @@ const ProductCard = ({ product, doAnimate }: ProductCardProps) => {
             className="flex justify-center"
             variants={doAnimate ? textMotion : undefined}
           >
-            <Link href={`/${product.id}`}>
+            <Link href={`/products/${product.id}`}>
               <button className="btn btn-neutral md:btn-wide">Order Now</button>
             </Link>
           </motion.div>

@@ -24,8 +24,9 @@ export default async function StoreLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getPermission } = getKindeServerSession();
   const isUserLoggedin = await isAuthenticated();
+  const adminPermission = await getPermission("store:admin");
 
   return (
     <html lang="en">
@@ -45,23 +46,34 @@ export default async function StoreLayout({
             ></label>
             <ul className="menu px-0 py-2 w-60 min-h-full bg-base-200">
               <li>
+                <h1 className="text-xl font-bold">Sugar DD Store</h1>
+              </li>
+              <div className="divider"></div>
+              <li>
                 <UserAccountActions />
               </li>
               <li>
-                <Link href="/about-us">
-                  <button className="btn btn-block">About Us</button>
+                <Link className="text-xl leading-10 my-2" href="/about-us">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/faq">
-                  <button className="btn btn-block">FAQs</button>
+                <Link className="text-xl leading-10 my-2" href="/faq">
+                  FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/orders">
-                  <button className="btn btn-block">View Orders</button>
+                <Link className="text-xl leading-10 my-2" href="/orders">
+                  View Orders
                 </Link>
               </li>
+              {adminPermission?.isGranted && (
+                <li>
+                  <Link className="text-xl leading-10 my-2" href="/admin-dash">
+                    Admin Dashboard
+                  </Link>
+                </li>
+              )}
               {isUserLoggedin && (
                 <li className="absolute bottom-2 w-full">
                   <div className="divider m-1"></div>
