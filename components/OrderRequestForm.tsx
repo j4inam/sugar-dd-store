@@ -12,6 +12,7 @@ import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
 import { Prisma } from "@prisma/client";
 import { Product } from "@/models/Product";
 import dayjs from "dayjs";
+import { showDialog } from "@/helpers/utils";
 import { useFormik } from "formik";
 import { useState } from "react";
 
@@ -35,11 +36,6 @@ const OrderRequestForm = ({
       startDate: null,
       endDate: null,
     });
-
-  const showDialog = (dialogId: string) => {
-    const modal: any = document.getElementById(dialogId);
-    modal.showModal();
-  };
 
   const orderConfirmationDialogActions = (
     <Link href={{ pathname: "/orders", query: { r: 1 } }}>
@@ -196,54 +192,30 @@ const OrderRequestForm = ({
               </div>
             )}
           </label>
-          {product?.quantityEditable && (
-            <div className="flex gap-4">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Weight / Quantity</span>
-                </div>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  placeholder="1"
-                  className={`input input-bordered bg-primary w-full ${
-                    formik.errors.quantity ? "input-error" : "input-secondary"
-                  }`}
-                  value={formik.values.quantity}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.quantity && (
-                  <div className="label">
-                    <span className="label-text-alt text-error">
-                      {formik.errors.quantity}
-                    </span>
-                  </div>
-                )}
-              </label>
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Unit</span>
-                </div>
-                <select
-                  id="unit"
-                  name="unit"
-                  value={formik.values.unit}
-                  onChange={formik.handleChange}
-                  className="select bg-primary select-secondary w-full max-w-xs"
-                >
-                  {product.quantityUnitVariants.map((quantityUnitVariant) => (
-                    <option
-                      key={quantityUnitVariant}
-                      value={quantityUnitVariant}
-                    >
-                      {quantityUnitVariant}
-                    </option>
-                  ))}
-                </select>
-              </label>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Quantity</span>
             </div>
-          )}
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              placeholder={product?.quantityStepValue.toString()}
+              step={product?.quantityStepValue}
+              className={`input input-bordered bg-primary w-full ${
+                formik.errors.quantity ? "input-error" : "input-secondary"
+              }`}
+              value={formik.values.quantity}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.quantity && (
+              <div className="label">
+                <span className="label-text-alt text-error">
+                  {formik.errors.quantity}
+                </span>
+              </div>
+            )}
+          </label>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Select a Size</span>
