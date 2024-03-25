@@ -47,12 +47,13 @@ model Products {
   price                Float
   productVariants      String[]
   quantity             Int
-  quantityEditable     Boolean
+  quantityStepValue    Float
   quantityUnit         String
-  quantityUnitVariants String[]
   sizeVariants         String[]
   title                String
   orders               Orders[]
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+  addedById            String
+  addedByName          String
 }

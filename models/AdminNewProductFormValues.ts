@@ -4,12 +4,13 @@ export interface AdminNewProductFormValues {
   title: string;
   description: string;
   price: number;
+  productVariantInputValue?: string;
   productVariants: string[];
   imageURL: string;
   quantity: number;
   quantityUnit: string;
-  isQuantityEditable: boolean;
-  quantityUnitVariants?: string[];
+  quantityStepValue: number;
+  sizeVariantInputValue?: string;
   sizeVariants: string[];
 }
 
@@ -28,9 +29,6 @@ export const adminNewProductFormSchema = object({
     .positive()
     .min(0.5, "Minimum quantity is 0.5"),
   quantityUnit: string().required("Quantity Unit is required."),
-  isQuantityEditable: boolean().required(
-    "Quantity editable toggle is required."
-  ),
-  productVariants: array().min(1).required("Atleast 1 variant is required."),
-  sizeVariants: array().min(1).required("Atleast 1 size option is required."),
+  quantityStepValue: number().required("Quantity step value is required"),
+  productVariants: array().min(1, "Atleast 1 product variant is required."),
 });

@@ -12,6 +12,7 @@ import { ORDER_CONFIRMATION_DIALOG_ID } from "@/constants";
 import { Prisma } from "@prisma/client";
 import { Product } from "@/models/Product";
 import dayjs from "dayjs";
+import { showDialog } from "@/helpers/utils";
 import { useFormik } from "formik";
 import { useState } from "react";
 
@@ -35,11 +36,6 @@ const OrderRequestForm = ({
       startDate: null,
       endDate: null,
     });
-
-  const showDialog = (dialogId: string) => {
-    const modal: any = document.getElementById(dialogId);
-    modal.showModal();
-  };
 
   const orderConfirmationDialogActions = (
     <Link href={{ pathname: "/orders", query: { r: 1 } }}>
