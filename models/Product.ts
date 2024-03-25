@@ -4,8 +4,7 @@ export type Product = {
   price: number;
   quantity: number;
   quantityUnit: string;
-  quantityEditable: boolean;
-  quantityUnitVariants: string[];
+  quantityStepValue: number;
   imageURL: string;
   description: string | null;
   productVariants: string[];
