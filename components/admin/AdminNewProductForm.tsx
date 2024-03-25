@@ -7,6 +7,7 @@ import {
 
 import { ADMIN_ADD_NEW_PRODUCT_DIALOG_ID } from "@/constants";
 import Dialog from "../Dialog";
+import Image from "next/image";
 import Link from "next/link";
 import { Prisma } from "@prisma/client";
 import { showDialog } from "@/helpers/utils";
@@ -346,29 +347,34 @@ const AdminNewProductForm = ({
               </span>
             </div>
           </label>
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text">Image URL</span>
-            </div>
-            <input
-              type="text"
-              id="imageURL"
-              name="imageURL"
-              placeholder="Chocolate Cake"
-              className={`input input-bordered grow ${
-                formik.errors.imageURL ? "input-error" : "input-primary"
-              }`}
-              value={formik.values.imageURL}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.imageURL && (
+          <section>
+            <label className="form-control w-full">
               <div className="label">
-                <span className="label-text-alt text-error">
-                  {formik.errors.imageURL}
+                <span className="label-text">Image URL</span>
+              </div>
+              <input
+                type="text"
+                id="imageURL"
+                name="imageURL"
+                placeholder="eg.: https://source.unsplash.com/image-id"
+                className={`input input-bordered grow ${
+                  formik.errors.imageURL ? "input-error" : "input-primary"
+                }`}
+                value={formik.values.imageURL}
+                onChange={formik.handleChange}
+              />
+              <div className="label">
+                {formik.errors.imageURL && (
+                  <span className="label-text-alt text-error">
+                    {formik.errors.imageURL}
+                  </span>
+                )}
+                <span className="label-text-alt">
+                  Please use images with portrait orientation.
                 </span>
               </div>
-            )}
-          </label>
+            </label>
+          </section>
           <section className="flex justify-center mt-4">
             <button className="btn btn-accent btn-wide" type="submit">
               Add Product
