@@ -3,8 +3,9 @@ import OrderStatusBadge from "@/components/OrderStatusBadge";
 import { OrdersSelect } from "@/models/Order";
 import dayjs from "dayjs";
 import prismaClient from "@/models/db";
+import { revalidatePath } from "next/cache";
 
-const getOrdersList = async (userId?: string) => {
+const getOrdersList = async () => {
   const orders: OrdersSelect[] = await prismaClient.orders.findMany({
     include: {
       product: true,
@@ -19,6 +20,7 @@ const getOrdersList = async (userId?: string) => {
 
 const AdminOrders = async () => {
   const ordersList: OrdersSelect[] = await getOrdersList();
+  revalidatePath("/")
   return (
     <>
       <h1 className="text-2xl font-bold">Manage Orders</h1>

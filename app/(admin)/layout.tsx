@@ -66,7 +66,7 @@ export default async function AdminLayout({
                 <h1 className="text-xl font-bold">Sugar DD Store Admin</h1>
               </li>
               <div className="divider"></div>
-              {/* <li>
+              <li>
                 <Link href={"/admin-dash"} className="text-xl leading-10 my-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ export default async function AdminLayout({
                   </svg>
                   Dashboard
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link
                   href={"/admin-products"}
