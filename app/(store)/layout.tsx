@@ -35,7 +35,7 @@ export default async function StoreLayout({
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col p-1">
             <Navbar />
-            <section className="min-h-[76vh] md:min-h-[76vh] p-1">{children}</section>
+            <section className="min-h-[78vh] md:min-h-[79vh] p-1">{children}</section>
             <Footer />
           </div>
           <div className="md:hidden drawer-side z-20">
