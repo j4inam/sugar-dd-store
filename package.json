@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "node ./build-scripts/add-urls-for-preview.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
