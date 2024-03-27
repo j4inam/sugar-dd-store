@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
   },
   icons: {
-    icon: '/96x96.png',
-    apple: '/96x96.png',
+    icon: "/96x96.png",
+    apple: "/96x96.png",
   },
 };
 
@@ -40,15 +40,6 @@ export default async function StoreLayout({
 
   return (
     <html lang="en">
-      <Head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="theme-color" content="#dda64d" />
-
-        {/* make sure to provide the name of your icon in below.*/}
-        <link rel="apple-touch-icon" href="icons/96x96.png" />
-        <link rel="manifest" href="manifest.json" />
-      </Head>
       <body className={`${quicksand.className}`} data-theme="luxury">
         <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
