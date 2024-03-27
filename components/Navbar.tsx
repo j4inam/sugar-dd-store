@@ -3,7 +3,7 @@ import UserAccountActions from "./UserAccountActions";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-xl rounded-xl">
+    <div className="navbar bg-base-100 shadow-xl rounded-xl sticky top-1 z-10">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost text-xl">
           Sugar DD
