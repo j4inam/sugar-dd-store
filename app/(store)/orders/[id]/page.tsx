@@ -52,8 +52,8 @@ const OrderDetails = async ({ params }: OrderDetailsProps) => {
   }
 
   return (
-    <section className="flex justify-center my-6 scroller">
-      <div className="card bg-primary shadow-xl rounded-box w-full overflow-y-scroll h-[56rem]">
+    <section className="flex justify-center my-2">
+      <div className="card bg-primary shadow-xl rounded-box w-full">
         <div className="card-body">
           <h1 className="text-2xl">Order Details</h1>
           <OrderItemDetails order={orderDetails} />

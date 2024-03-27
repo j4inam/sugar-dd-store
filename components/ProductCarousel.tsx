@@ -11,7 +11,7 @@ const ProductCarousel = ({ productsList }: ProductCarouselProps) => {
       <div className="carousel carousel-center sm:w-4/5 xl:w-1/2 p-4 space-x-4 bg-primary rounded-box shadow-xl">
         {productsList.map((product, idx) => (
           <div className="carousel-item" id={`item${idx + 1}`} key={product.id}>
-            <ProductCard product={product} doAnimate />
+            <ProductCard product={product} />
           </div>
         ))}
       </div>

@@ -1,8 +1,8 @@
-import ProductCarousel from "@/components/ProductCarousel";
-import VerticalProductCarousel from "@/components/VerticalProductCarousel";
-import { Product } from "@/models/Product";
-import { Suspense } from "react";
 import Loading from "./loading";
+import { Product } from "@/models/Product";
+import ProductCarousel from "@/components/ProductCarousel";
+import { Suspense } from "react";
+import VerticalProductList from "@/components/VerticalProductList";
 import prismaClient from "@/models/db";
 
 const getProductsList = async () => {
@@ -17,9 +17,9 @@ const Home = async () => {
   return (
     <Suspense fallback={<Loading />}>
       <section className="flex flex-col items-center w-full md:hidden lg:mt-4">
-        <VerticalProductCarousel productsList={productsList} />
+        <VerticalProductList productsList={productsList} />
       </section>
-      <section className="hidden md:flex flex-col items-center lg:mt-4">
+      <section className="hidden md:flex flex-col items-center justify-center h-full">
         <ProductCarousel productsList={productsList} />
       </section>
     </Suspense>

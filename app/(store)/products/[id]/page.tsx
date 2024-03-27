@@ -28,8 +28,8 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
   let userData: KindeUser | null = await getUser();
 
   return (
-    <section className="flex justify-center my-6">
-      <div className="card bg-primary shadow-xl rounded-box w-full md:w-11/12 xl:w-9/12 2xl:w-2/3 overflow-y-scroll h-[40rem] md:h-[54rem] scroller">
+    <section className="flex justify-center">
+      <div className="card bg-primary shadow-xl rounded-box w-full md:w-11/12 xl:w-8/12 2xl:w-1/2 my-2">
         <div className="card-body">
           <div className="flex flex-col md:flex-row md:gap-20">
             <section className="flex flex-col w-full items-center md:h-[26rem] lg:h-[28rem] xl:h-[32rem]">
