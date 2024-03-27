@@ -33,31 +33,37 @@ const Orders = async () => {
   );
 
   return (
-    <section className="flex justify-center my-6">
-      <div className="card bg-primary shadow-xl rounded-box w-full overflow-y-scroll h-[56rem] scroller">
-        <div className="card-body">
-          <h1 className="text-2xl">Your Orders</h1>
-          {ordersList.length === 0 && (
-            <section>
-              {
-                <EmptyList
-                  text={
-                    "Your dessert paradise awaits! Fill your hearts with the sweetness of our fresh-baked, handmade cakes and treats."
-                  }
-                  emptyListActions={emptyCartActions}
-                />
-              }
-            </section>
-          )}
-          {ordersList.length !== 0 && (
-            <section className="grid grid-cols-1 lg: md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-              {ordersList.map((order: OrdersSelect) => (
-                <OrderItem order={order} key={order.id} />
-              ))}
-            </section>
-          )}
+    <section>
+      <div className="card bg-primary shadow-xl my-2">
+        <div className="card-body py-4">
+          <h1 className="text-2xl font-bold">Your Orders</h1>
         </div>
       </div>
+      {ordersList.length === 0 && (
+        <section>
+          <div className="card bg-primary shadow-xl rounded-box w-full overflow-y-scroll h-[56rem]">
+            <div className="card-body">
+              <EmptyList
+                text={
+                  "Your dessert paradise awaits! Fill your hearts with the sweetness of our fresh-baked, handmade cakes and treats."
+                }
+                emptyListActions={emptyCartActions}
+              />
+            </div>
+          </div>
+        </section>
+      )}
+      {ordersList.length !== 0 && (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
+          {ordersList.slice(0,1).map((order: OrdersSelect) => (
+            <div className="card bg-primary shadow-xl rounded-box w-full overflow-y-scroll">
+              <div className="card-body p-4">
+                <OrderItem order={order} key={order.id} />
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
     </section>
   );
 };

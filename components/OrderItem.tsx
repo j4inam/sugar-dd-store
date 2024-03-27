@@ -12,7 +12,7 @@ export type OrderItemsProps = {
 const OrderItem = ({ order }: OrderItemsProps) => {
   return (
     <div className="card xl:card-side bg-base-100 shadow-xl">
-      <figure className="relative h-80 md:h-96 xl:w-48">
+      <figure className="relative h-96 xl:w-48">
         <Image src={order.product?.imageURL || ""} alt="Movie" fill={true} />
       </figure>
       <div className="card-body p-4">

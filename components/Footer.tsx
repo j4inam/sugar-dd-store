@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <>
-      <section className="flex md:hidden">
+      <section className="flex md:hidden mt-4">
         <footer className="footer items-center p-4 bg-base-100 rounded-xl">
           <aside className="items-center grid-flow-col">
             <svg

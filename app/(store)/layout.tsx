@@ -33,12 +33,12 @@ export default async function StoreLayout({
       <body className={`${quicksand.className}`} data-theme="luxury">
         <div className="drawer drawer-end">
           <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col justify-between md:h-screen p-1">
+          <div className="drawer-content flex flex-col p-1">
             <Navbar />
-            {children}
+            <section className="min-h-[76vh] md:min-h-[76vh] p-1">{children}</section>
             <Footer />
           </div>
-          <div className="md:hidden drawer-side">
+          <div className="md:hidden drawer-side z-20">
             <label
               htmlFor="nav-drawer"
               aria-label="close sidebar"

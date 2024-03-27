@@ -19,7 +19,7 @@ const Home = async () => {
       <section className="flex flex-col items-center w-full md:hidden lg:mt-4">
         <VerticalProductList productsList={productsList} />
       </section>
-      <section className="hidden md:flex flex-col items-center lg:mt-4">
+      <section className="hidden md:flex flex-col items-center justify-center h-full">
         <ProductCarousel productsList={productsList} />
       </section>
     </Suspense>
