@@ -1,8 +1,7 @@
-import { OrdersSelect, TSOrderStatus } from "@/models/Order";
-
 import Image from "next/image";
 import Link from "next/link";
 import OrderStatusBadge from "./OrderStatusBadge";
+import { OrdersSelect } from "@/models/Order";
 import dayjs from "dayjs";
 
 export type OrderItemsProps = {
