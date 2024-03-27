@@ -13,7 +13,7 @@ const OrderStatusBadge = ({ status }: OrderStatusBadgeProps) => {
       )}
 
       {status === TSOrderStatus.SUBMITTED && (
-        <div className="badge badge-primary">{status}</div>
+        <div className="badge badge-neutral">{status}</div>
       )}
 
       {status === TSOrderStatus.CONFIRMED && (

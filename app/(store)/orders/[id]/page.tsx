@@ -52,10 +52,15 @@ const OrderDetails = async ({ params }: OrderDetailsProps) => {
   }
 
   return (
-    <section className="flex justify-center my-2">
-      <div className="card bg-primary shadow-xl rounded-box w-full">
+    <section>
+      <div className="card bg-primary shadow-xl my-2">
+        <div className="card-body py-4">
+          <h1 className="text-2xl font-bold">Order Details</h1>
+          <p className="text-primary-content font-bold">Order ID: {orderDetails.id.slice(-6)}</p>
+        </div>
+      </div>
+      <div className="card bg-primary shadow-xl rounded-box w-full my-2">
         <div className="card-body">
-          <h1 className="text-2xl">Order Details</h1>
           <OrderItemDetails order={orderDetails} />
         </div>
       </div>
