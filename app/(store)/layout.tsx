@@ -84,7 +84,7 @@ export default async function StoreLayout({
                   About Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link className="text-xl leading-10 my-2" href="/faq">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ export default async function StoreLayout({
                   </svg>
                   FAQs
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link className="text-xl leading-10 my-2" href="/orders">
                   <svg
