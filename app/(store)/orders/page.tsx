@@ -2,6 +2,8 @@ import EmptyList from "@/components/EmptyList";
 import Link from "next/link";
 import OrderItem from "@/components/OrderItem";
 import { OrdersSelect } from "@/models/Order";
+import ProductListItemSkeleton from "@/components/ProductListItemSkeleton";
+import { Suspense } from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prismaClient from "@/models/db";
 
@@ -56,7 +58,10 @@ const Orders = async () => {
       {ordersList.length !== 0 && (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 mb-2">
           {ordersList.map((order: OrdersSelect) => (
-            <div className="card bg-primary shadow-xl rounded-box w-full" key={order.id}>
+            <div
+              className="card bg-primary shadow-xl rounded-box w-full"
+              key={order.id}
+            >
               <div className="card-body p-4">
                 <OrderItem order={order} />
               </div>

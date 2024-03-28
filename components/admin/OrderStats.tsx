@@ -132,12 +132,12 @@ const OrderStats = async ({ startDate, endDate }: OrderStatsProps) => {
   return (
     <section className="flex justify-center">
       <div className="stats stats-vertical md:stats-horizontal shadow w-full lg:w-3/4">
-        <div className="stat place-items-center text-secondary">
+        <div className="stat place-items-center text-accent">
           <div className="stat-title">Orders Received</div>
           <div className="stat-value">{ordersCount?.TOTAL}</div>
           <div className="stat-desc">Since {startDate.format("MMMM YYYY")}</div>
         </div>
-        <div className="stat place-items-center text-primary">
+        <div className="stat place-items-center text-accent">
           <div className="stat-title">Total Revenue</div>
           <div className="stat-value">${totalOrderRevenue}</div>
           <div className="stat-desc">
