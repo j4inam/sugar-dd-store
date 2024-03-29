@@ -1,7 +1,6 @@
 import "./store-globals.css";
 
 import Footer from "@/components/Footer";
-import Head from "next/head";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import type { Metadata } from "next";
@@ -20,12 +19,16 @@ export const metadata: Metadata = {
   description: "Admin Dashboard for Sugar DD Store",
   manifest: "/manifest.json",
   appleWebApp: {
+    capable: true,
     title: "Sugar DD Store",
     statusBarStyle: "black-translucent",
   },
   icons: {
     icon: "/96x96.png",
     apple: "/96x96.png",
+  },
+  verification: {
+    google: "5NJhMCqf92yUQSmHMJf5SXPO0tGC-ZVH66yfWwcu3Ko",
   },
 };
 
