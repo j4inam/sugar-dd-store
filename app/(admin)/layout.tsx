@@ -27,7 +27,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="retro">
+    <html lang="en" data-theme="emerald">
       <body className={`${quicksand.className}`}>
         <div className="drawer">
           <input id="admin-drawer" type="checkbox" className="drawer-toggle" />

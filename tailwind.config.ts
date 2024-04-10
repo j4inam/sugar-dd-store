@@ -9,8 +9,7 @@ const config: Config = {
   ],
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["retro", "luxury"],
+    themes: ["emerald", "luxury"],
   },
-  darkMode: "class",
 };
 export default config;
