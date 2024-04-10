@@ -72,12 +72,12 @@ const AdminOrders = async () => {
                   </div>
                 </td>
                 <td>
-                  <Link href={`/admin-products/${order.id}`}>
+                  <Link href={`/admin-orders/${order.id}`}>
                     <OrderStatusBadge status={order.status} />
                   </Link>
                 </td>
                 <th>
-                  <Link href={`/admin-products/${order.id}`}>
+                  <Link href={`/admin-orders/${order.id}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
