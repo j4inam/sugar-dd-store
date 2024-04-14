@@ -16,8 +16,8 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Welcome to Sugar DD Admin",
-  description: "Admin Dashboard for Sugar DD Store",
+  title: "Welcome to Sugar DD Store",
+  description: "Baking sweet dreams, one cake at a time",
   manifest: "/manifest.json",
   appleWebApp: {
     title: "Sugar DD Store",
